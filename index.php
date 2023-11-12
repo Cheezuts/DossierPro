@@ -1,14 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
+<?php
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DossierPro</title>
-</head>
+use app\Controller\Controller;
 
-<body>
-    <h1>Hello</h1>
-</body>
 
-</html>
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+require_once 'Autoloader.php';
+Autoloader::register();
+
+$controller = new Controller();
+
+if (isset($_GET['action'])) {
+    switch ($_GET['action']) {
+            // creation d'une voiture
+            //case 'create':
+            //    $controller->createCar();
+            //    break;
+        default:
+            $controller->notFound('La page n\'existe pas <br><span class="fw-bold fs-1"> erreur 404 </span>');
+            break;
+    }
+} else {
+    $controller->home();
+}
