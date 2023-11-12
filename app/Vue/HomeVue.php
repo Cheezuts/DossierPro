@@ -9,6 +9,7 @@ class HomeVue extends RenderGlobalVue
     {
         $content = '
             <h1>Accueil</h1>
+            <h2>Accueil</h2>
             <p>Bienvenue sur le site de location de voitures</p>
             <a href="?action=list" class="btn btn-primary">Voir la liste des voitures</a>
             ';

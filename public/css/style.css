@@ -1,0 +1,47 @@
+/* Styles pour la navigation */
+.container-fluid.sticky-top {
+  background-color: #ef222d;
+}
+
+.container-fluid.sticky-top h1,
+.container-fluid.sticky-top a.navbar-brand,
+.container-fluid.sticky-top .navbar-nav .nav-link {
+  font-family: "Figtree-Regular", sans-serif;
+  color: #fff;
+  font-weight: bold;
+}
+
+h1 {
+  font-family: "Figtree-Regular", sans-serif;
+  font-weight: bold;
+  font-style: bold;
+}
+
+h2 {
+  font-family: "Figtree-Regular", sans-serif;
+  font-weight: bold;
+  font-style: italic;
+}
+p {
+  font-family: "Figtree-Regular", sans-serif;
+  font-weight: bold;
+  font-style: bold;
+}
+
+/* Font-face */
+
+@font-face {
+  font-family: "Figtree-Regular";
+  src: url("fonts/Figtree-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Figtree-BlackItalic";
+  src: url("fonts/Figtree-BlackItalic.ttf") format("truetype");
+  font-weight: normal;
+  font-style: italic;
+}
+
+/* Ajoutez d'autres styles pour les autres polices Figtree */

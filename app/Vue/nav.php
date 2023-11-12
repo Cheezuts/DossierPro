@@ -1,8 +1,8 @@
-<div class="container-fluid sticky-top bg-dark">
+<div class="container-fluid sticky-top ">
     <div class="container">
-        <nav class="navbar navbar-expand-lg navbar-dark p-0">
+        <nav class="navbar navbar-expand-lg  p-0">
             <a href="/TestMVC/index.php" class="navbar-brand">
-                <h1 class="text-white">AE<span class="text-dark">.</span>MVC</h1>
+                <h1 class="text-white">DossierProLOCAL<span class="">.</span>AE</h1>
             </a>
             <button type="button" class="navbar-toggler ms-auto me-0" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                 <span class="navbar-toggler-icon"></span>
