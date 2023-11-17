@@ -32,14 +32,12 @@ p {
 
 @font-face {
   font-family: "Figtree-Regular";
-  src: url("fonts/Figtree-Regular.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: "Figtree-BlackItalic";
-  src: url("fonts/Figtree-BlackItalic.ttf") format("truetype");
   font-weight: normal;
   font-style: italic;
 }

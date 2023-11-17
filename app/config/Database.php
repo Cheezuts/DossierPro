@@ -24,7 +24,7 @@ class Database
     private function getPDO()
     {
         if ($this->pdo === null) {
-            $pdo = new PDO('mysql:host=localhost;dbname=Dossierpro;charset=utf8', 'root', 'toor');
+            $pdo = new PDO('mysql:host=localhost;dbname=dossierpro;charset=utf8', 'root', 'toor');
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $this->pdo = $pdo;
             return $pdo;
@@ -33,18 +33,56 @@ class Database
         return $this->pdo;
     }
 
-    public function query($statement, $class_name, $one = false)
+    // ...
+    public function query($statement, $class_name = null, $one = false)
     {
         $req = $this->getPDO()->query($statement);
-        $req->setFetchMode(PDO::FETCH_CLASS, $class_name);
-        $datas = $req->fetchAll(PDO::FETCH_CLASS, $class_name);
-        if ($one) {
-            $datas = $req->fetch();
+
+        if ($class_name === null) {
+            // Utiliser un tableau associatif si aucune classe n'est spécifiée
+            if ($one) {
+                $data = $req->fetch(PDO::FETCH_ASSOC);
+            } else {
+                $data = $req->fetchAll(PDO::FETCH_ASSOC);
+            }
         } else {
-            $datas = $req->fetchAll();
+            // Utiliser la classe spécifiée pour le mapping
+            $req->setFetchMode(PDO::FETCH_CLASS, $class_name);
+            if ($one) {
+                $data = $req->fetch();
+            } else {
+                $data = $req->fetchAll();
+            }
         }
-        return $datas;
+
+        return $data;
     }
+    // ...
+
+
+
+
+    // function query pour les requêtes préparées sans classe
+    // public function query($statement, $one = false)
+    // {
+    //     $req = $this->getPDO()->query($statement);
+
+    //     if ($one) {
+    //         $data = $req->fetch(PDO::FETCH_ASSOC);
+    //     } else {
+    //         $data = $req->fetchAll(PDO::FETCH_ASSOC);
+    //     }
+
+    //     return $data;
+    // }
+    public function getAllArticles()
+    {
+        $statement = 'SELECT * FROM articles';
+        return $this->query($statement, 'App\Model\Article');
+    }
+
+
+
 
     public function prepare($statement, $attributes, $class_name, $one = false)
     {

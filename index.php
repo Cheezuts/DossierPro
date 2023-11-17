@@ -10,6 +10,9 @@ error_reporting(E_ALL);
 require_once 'Autoloader.php';
 Autoloader::register();
 
+require_once 'app/config/App.php'; // Ajout de cette ligne
+
+
 $controller = new Controller();
 
 if (isset($_GET['action'])) {
