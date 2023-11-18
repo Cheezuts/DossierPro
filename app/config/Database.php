@@ -57,29 +57,20 @@ class Database
 
         return $data;
     }
-    // ...
 
+    public function createArticle($titre, $contenu)
+    {
+        $statement = 'INSERT INTO articles (titre, contenu, date) VALUES (:titre, :contenu, NOW())';
+        $attributes = array(':titre' => $titre, ':contenu' => $contenu);
+        return $this->prepare($statement, $attributes, 'App\Model\Article');
+    }
 
-
-
-    // function query pour les requêtes préparées sans classe
-    // public function query($statement, $one = false)
-    // {
-    //     $req = $this->getPDO()->query($statement);
-
-    //     if ($one) {
-    //         $data = $req->fetch(PDO::FETCH_ASSOC);
-    //     } else {
-    //         $data = $req->fetchAll(PDO::FETCH_ASSOC);
-    //     }
-
-    //     return $data;
-    // }
     public function getAllArticles()
     {
         $statement = 'SELECT * FROM articles';
         return $this->query($statement, 'App\Model\Article');
     }
+
 
 
 

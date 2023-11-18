@@ -17,10 +17,12 @@ $controller = new Controller();
 
 if (isset($_GET['action'])) {
     switch ($_GET['action']) {
-            // creation d'une voiture
-            //case 'create':
-            //    $controller->createCar();
-            //    break;
+        case 'create':
+            require_once 'app/Vue/create.php';
+            break;
+        case 'createArticle': // Ajoutez ce cas pour gérer l'action createArticle
+            $controller->createArticle(); // Appelle la méthode du contrôleur pour créer un article
+            break;
         default:
             $controller->notFound('La page n\'existe pas <br><span class="fw-bold fs-1"> erreur 404 </span>');
             break;
