@@ -41,9 +41,31 @@
                     <li class="nav-link">
                         <a href="?action=create" class="nav-link">Create</a>
                     </li>
+
+                    <!-- Lien Admin -->
                     <li class="nav-link">
-                        <a href="?action=admin" class="nav-link">Admin</a>
+                        <?php
+                        // Vérifier si la session est active
+                        if (session_status() === PHP_SESSION_NONE) {
+                            session_start();
+                        }
+
+                        // Si l'administrateur est connecté, rediriger vers le dashboard
+                        if (isset($_SESSION['admin_email'])) {
+                            echo '<a href="?action=adminPage" class="nav-link">Admin</a>';
+                        } else {
+                            echo '<a href="?action=admin" class="nav-link">Admin</a>';
+                        }
+                        ?>
                     </li>
+
+                    <?php if (isset($_GET['action']) && $_GET['action'] === 'adminPage') : ?>
+                        <!-- Lien de déconnexion uniquement dans la page AdminDashboard -->
+                        <li class="nav-link">
+                            <a href="?action=logout" class="nav-link">Déconnexion</a>
+                        </li>
+                    <?php endif; ?>
+
                 </ul>
                 <button type="button" class="btn text-white p-0 d-none d-lg-block" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fa fa-search"></i></button>
             </div>

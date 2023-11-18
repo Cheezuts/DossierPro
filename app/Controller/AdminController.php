@@ -21,6 +21,13 @@ class AdminController
 
     public function loginAdmin()
     {
+        // Vérifier si l'utilisateur est déjà authentifié
+        if ($this->authenticator->isAdminAuthenticated()) {
+            // Rediriger vers la page d'administration
+            header('Location: ?action=adminPage');
+            exit();
+        }
+
         $message = '';
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
@@ -31,6 +38,9 @@ class AdminController
             // Authentifier l'administrateur
             if ($this->authenticator->authenticateAdmin($email, $password)) {
                 // L'authentification a réussi
+                // Initialiser la session
+                session_start();
+                $_SESSION['admin_email'] = $email;
                 // Rediriger vers la page d'administration
                 header('Location: ?action=adminPage');
                 exit(); // Assurez-vous de terminer le script ici
@@ -48,7 +58,32 @@ class AdminController
 
     public function adminPage()
     {
-        $vue = new AdminDashboard();
-        $vue->render('Contenu de la page d\'administration');
+        // Vérifier si la session est active
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+
+        if (isset($_SESSION['admin_email'])) {
+            // L'utilisateur est connecté
+            $message = 'Connecté en tant qu\'administrateur : ' . $_SESSION['admin_email'];
+
+            // Affichez le lien de déconnexion
+            $message .= '<br><a href="?action=logout">Déconnexion</a>';
+
+            $vue = new AdminDashboard();
+            $vue->render($message);
+        } else {
+            // L'utilisateur n'est pas connecté, rediriger vers la page de connexion
+            header('Location: ?action=loginAdmin');
+            exit();
+        }
+    }
+
+    public function logout()
+    {
+        // Détruire la session et rediriger vers la page de connexion
+        session_destroy();
+        header('Location: index.php');
+        exit();
     }
 }

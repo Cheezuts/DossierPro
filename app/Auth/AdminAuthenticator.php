@@ -22,4 +22,10 @@ class AdminAuthenticator
         // L'authentification a échoué
         return false;
     }
+
+    public function isAdminAuthenticated()
+    {
+        // Vérifier si l'utilisateur est authentifié en tant qu'administrateur
+        return isset($_SESSION['admin_authenticated']) && $_SESSION['admin_authenticated'] === true;
+    }
 }

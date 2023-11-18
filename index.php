@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 use app\Controller\Controller;
 use app\Controller\AdminController;
 
@@ -12,6 +14,21 @@ require_once 'Autoloader.php';
 Autoloader::register();
 
 require_once 'app/config/App.php'; // Ajout de cette ligne
+
+
+// Démarrez la session si elle n'est pas déjà active
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+// Vérifiez si la clé 'admin_email' existe dans la session
+if (isset($_SESSION['admin_email'])) {
+    echo 'Connecté en tant qu\'administrateur : ' . $_SESSION['admin_email'];
+    // Vous pouvez également ajouter un lien de déconnexion ici si nécessaire
+    echo '<br><a href="?action=logout">Déconnexion</a>';
+} else {
+    echo 'Non connecté en tant qu\'administrateur.';
+}
 
 
 $controller = new Controller();
@@ -36,6 +53,11 @@ if (isset($_GET['action'])) {
         case 'adminPage':
             $adminController = new AdminController();
             $adminController->adminPage();
+            break;
+
+        case 'logout':
+            $adminController = new AdminController();
+            $adminController->logout();
             break;
 
         default:
