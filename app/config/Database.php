@@ -34,9 +34,10 @@ class Database
     }
 
     // ...
-    public function query($statement, $class_name = null, $one = false)
+    public function query($statement, $class_name = null, $one = false, $params = [])
     {
-        $req = $this->getPDO()->query($statement);
+        $req = $this->getPDO()->prepare($statement);
+        $req->execute($params);
 
         if ($class_name === null) {
             // Utiliser un tableau associatif si aucune classe n'est spécifiée
@@ -57,6 +58,7 @@ class Database
 
         return $data;
     }
+
 
     public function createArticle($titre, $contenu)
     {

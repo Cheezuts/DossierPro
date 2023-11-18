@@ -41,6 +41,9 @@
                     <li class="nav-link">
                         <a href="?action=create" class="nav-link">Create</a>
                     </li>
+                    <li class="nav-link">
+                        <a href="?action=admin" class="nav-link">Admin</a>
+                    </li>
                 </ul>
                 <button type="button" class="btn text-white p-0 d-none d-lg-block" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fa fa-search"></i></button>
             </div>
